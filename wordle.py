@@ -1,6 +1,9 @@
 import random
 import json
 
+global azletters
+azletters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
 def get_word():
     with open("words.json") as words:
         words = json.load(words)
@@ -14,6 +17,11 @@ def make_a_guess(guess, word):
     words = list(word)
 
     for num, x in enumerate(range(0, 5)):
+        try:
+            azletters.remove(guess[num])
+            
+        except:
+            continue
         if guess[num].lower() in words:
             output[num] = guess[num].lower()
             words.remove(guess[num])
@@ -25,9 +33,6 @@ def make_a_guess(guess, word):
             output[num] = word[num].upper()
             
         
-        
-
-        print("".join(output))
     
     return "".join(output)
 
@@ -47,7 +52,7 @@ def main_game():
         print(f"Turn {turns+1}")
         inputguess = input_guess()
         output = make_a_guess(inputguess, word)
-        print(output, end="\n\n")    
+        print(output, "\nRemaining letters:", "".join(azletters), end="\n\n")    
         if inputguess != word:
             pass
         else:
