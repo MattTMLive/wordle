@@ -21,7 +21,7 @@ def make_a_guess(guess, word):
             azletters.remove(guess[num])
             
         except:
-            continue
+            pass
         if guess[num].lower() in words:
             output[num] = guess[num].lower()
             words.remove(guess[num])
